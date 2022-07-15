@@ -1,0 +1,115 @@
+/* Author: Leonie Anna Maria Schulte*/
+
+@media only screen and (min-width: 698px) {
+
+    .login-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        align-self: center;
+        border-radius: var(--edgeRadius);
+        margin-top: 7%;
+        margin-bottom: 7%;
+        margin-left: 32.5%;
+        padding: 3%;
+        width: 30%;
+        height: 20%;
+        background-color: #45A29E;
+    }
+
+    .login-title {
+    color: #1F2833;
+    text-align: center;
+    font-size: 42px;
+    justify-content: center;
+    }
+
+    .login-subtitle {
+    color: #1F2833;
+    text-align: center;
+    font-size: 24px;
+    justify-content: center;
+    }
+
+    .login-text {
+    display: flex;
+    justify-content: center;
+    color: #1F2833;
+    font-size: 20px;
+    }
+
+    .submit-button{
+    margin-top: 2.5%;
+    padding: 2%;
+    background-color: #C5C6C7;
+    color: #0B0C10;
+    border-radius: var(--edgeRadius);
+    }
+
+    .centered{
+    display: flex;
+    justify-content: center;
+    }
+
+    .loginLogo{
+    width: 55%;
+    }
+        
+   
+}
+
+
+@media only screen and (max-width: 697px) {
+    .login-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        align-self: center;
+        border-radius: var(--edgeRadius);
+        margin: 22.5%;
+        margin-top: 75%;
+        padding: 3%;
+        width: 50%;
+        height: 20%;
+        background-color: #45A29E;
+    }
+
+    .login-title {
+    color: #1F2833;
+    text-align: center;
+    font-size: 42px;
+    justify-content: center;
+    }
+
+    .login-subtitle {
+    color: #1F2833;
+    text-align: center;
+    font-size: 24px;
+    justify-content: center;
+    }
+
+    .login-text {
+    display: flex;
+    justify-content: center;
+    color: #1F2833;
+    font-size: 20px;
+    }
+
+    .submit-button{
+    margin-top: 2.5%;
+    padding: 2%;
+    background-color: #C5C6C7;
+    color: #0B0C10;
+    border-radius: var(--edgeRadius);
+    }
+
+    .centered{
+    display: flex;
+    justify-content: center;
+    }
+
+    .loginLogo{
+    width: 55%;
+    }
+}
+

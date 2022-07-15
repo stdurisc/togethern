@@ -1,0 +1,22 @@
+.Inputbar{
+    margin: 4%;
+    margin-bottom: 6%;
+    width: 91%;
+    font-size: 100%;
+    
+}
+
+
+@media only screen and (min-width: 698px) {
+    .ReactPlayer{
+        margin-left: 4%
+    }
+}
+
+
+@media only screen and (max-width: 697px) {
+    .ReactPlayer{
+        margin-left: 2%;
+        margin-bottom: 2%
+    }
+}

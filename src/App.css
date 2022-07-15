@@ -1,0 +1,117 @@
+/* Author: Leonie Anna Maria Schulte*/
+
+.App {
+  text-align: center;
+  background-color: #0B0C10;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  color:#0B0C10;
+  font-family: Arial;
+  text-align: center;
+  align-items: center;
+}
+
+ .hiddenNavs{
+  position:absolute;
+  left:-10000px;
+  top:auto;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+}  
+
+@media only screen and (min-width: 698px) {
+
+  .row {
+    display: flex;
+    height: 100%;
+  }
+  .roomlist-box {
+    display: inline-block;
+    width: 25%;
+    border: 1px solid #1F2833;
+    display: flex;
+    flex-direction: column;
+    background-color: #45A29E;
+    color: #C5C6C7;
+    margin: 0.25%;
+    margin-top: 0.5%;
+  }
+  .video-box {
+    display: inline-block;
+    width: 50%;
+    border: 1px solid #1F2833;
+    background-color: #45A29E;
+    color: #C5C6C7;
+    margin: 0.25%;
+    margin-top: 0.5%;
+  }
+
+  .memberlist-box {
+    display: inline-block;
+    width: 25%;
+    border: 1px solid #1F2833;
+    display: flex;
+    flex-direction: column;
+    background-color: #45A29E;
+    color: #C5C6C7;
+    margin: 0.25%;
+    margin-top: 0.5%;
+  }
+}
+
+@media only screen and (max-width: 697px) {
+
+  .coloumn {
+    height: 100%;
+  }
+  .roomlist-box {
+    display: inline-block;
+    width: 100%;
+    border: 1px solid #1F2833;
+    background-color: #45A29E;
+    color: #C5C6C7;
+    margin: 0.25%;
+    margin-top: 0.5%;
+  }
+  .video-box {
+    display: inline-block;
+    width: 100%;
+    border: 1px solid #1F2833;
+    background-color: #45A29E;
+    color: #C5C6C7;
+    margin: 0.25%;
+    margin-top: 0.5%;
+  }
+
+  .memberlist-box {
+    display: inline-block;
+    width: 100%;
+    border: 1px solid #1F2833;
+    background-color: #45A29E;
+    color: #C5C6C7;
+    margin: 0.25%;
+    margin-top: 0.5%;
+  }
+}
+.button {
+  cursor: pointer;
+  border: 1px solid #1F2833;
+  padding: 8px;
+  min-width: 64px;
+  background: #66FCF1;
+}
+
+button:focus {
+  border: 3px solid #fd009c;
+}
+
+a:focus {
+  border: 3px solid #fd009c;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
