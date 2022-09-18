@@ -8,7 +8,7 @@ export default function RoomSystem() {
 // varies get,put,delete,..... api methods concerning the rooms
 //api readme here: https://gitlab.hs-anhalt.de/barth_to/watch2gether
 
-const fetchUrl = 'https://gruppe16.toni-barth.com/'
+const fetchUrl = 'https://gruppe11.toni-barth.com/'
 
 async function getAllRooms () { //returns a Promise that contains all existing rooms
     return await fetch(fetchUrl +'rooms/')

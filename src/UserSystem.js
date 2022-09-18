@@ -10,7 +10,7 @@ export default function UserSystem() {
   )
 }
 
-const fetchUrl = 'https://gruppe16.toni-barth.com/'
+const fetchUrl = 'https://gruppe11.toni-barth.com/'
 
 function getAllUsers () { //returns a Promise that contains all existing users
  
