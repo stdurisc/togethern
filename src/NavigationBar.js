@@ -7,6 +7,7 @@ import Explanation from "./Explanation"
 import handshake from "./material/icon_handshake_dark.png";
 import wheel from "./material/icon_wheel_dark.png";
 import logo from "./material/logo_dark.png"
+import ChatWorkplace from "./ChatWorkplace";
 
 class NavigationBar extends React.Component{
     constructor(props) {
@@ -22,6 +23,7 @@ class NavigationBar extends React.Component{
                         <NavigationRow></NavigationRow>
                     </ul>
                 </nav>
+
             </div>
         );
     }

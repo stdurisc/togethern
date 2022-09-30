@@ -6,39 +6,48 @@ import {createNewUser} from './UserSystem'
 import logo from "./material/logo_dark.png"
 import './Login.css'
 import reactStringReplace from 'react-string-replace'
+import {enterRoom} from './RoomSystem'
+import { useLocation, useParams } from 'react-router-dom'
 
-export default function Login({changeUser}) { //function that handles login by providing a field for the user name and changing it in parent "App.js"
-    const inputRef = useRef()
-    const handleSubmit = async(e) => {
-      if (inputRef.current.value !== undefined || reactStringReplace(inputRef.current.value, String.fromCharCode(32), ""  ) !== '' ) {
-        e.preventDefault();
-        console.log('You clicked submit.')
-        let response = await createNewUser(inputRef.current?.value) 
-        changeUser ( {
-          id: response['id'],
-          name: response['name'],
-        })
-      } else {
-        inputRef.focus()
+export default function Login({changeUser,changeRoom} ) { //function that handles login by providing a field for the user name and changing it in parent "App.js"
+  // Holt Raum aus URL
+  const destinyRoom = (window.location.pathname).substring(1) // macht / weg
+
+  const inputRef = useRef()
+  const handleSubmit = async(e) => {
+    if (inputRef.current.value !== undefined || reactStringReplace(inputRef.current.value, String.fromCharCode(32), ""  ) !== '' ) {
+      e.preventDefault();
+      console.log('You clicked submit.')
+      let response = await createNewUser(inputRef.current?.value) 
+      changeUser ( {
+        id: response['id'],
+        name: response['name'],
+      })
+      // Wenn Raum in URL war wird der gejoined
+      if(changeRoom && destinyRoom) {
+        enterRoom(destinyRoom, response['id'])
+        changeRoom(destinyRoom)
       }
+    } else {
+      inputRef.focus()
     }
-  
-    return(
-      <div className="login-wrapper">
-        <a className="hiddenNavs" aria-label='Skip to username input' href='#username_input'>skip to the username input</a>
-        <form onSubmit={handleSubmit}>
-          <div className="centered">
-            <img className="loginLogo" alt = "Logo of Togethern" src={logo}/>
-          </div>
-          <h1 className="login-title"> Login Page</h1>
-          <h2 className="login-subtitle">Please choose a username to continue!</h2>
-          <label className="centered">
-            <input id="username_input" ref={inputRef} type="text" required/>
-          </label>
-          <div className="centered">
-            <button className="submit-button" aria-label={"creates a new user with your desired username"} type="submit"><b>Submit</b></button>
-          </div>
-        </form>
-      </div>
-    )
+  }
+  return(
+    <div className="login-wrapper">
+      <a className="hiddenNavs" aria-label='Skip to username input' href='#username_input'>skip to the username input</a>
+      <form onSubmit={handleSubmit}>
+        <div className="centered">
+          <img className="loginLogo" alt = "Logo of Togethern" src={logo}/>
+        </div>
+        <h1 className="login-title"> Login Page</h1>
+        <h2 className="login-subtitle">Please choose a username to continue!</h2>
+        <label className="centered">
+          <input id="username_input" ref={inputRef} type="text" required/>
+        </label>
+        <div className="centered">
+          <button className="submit-button" aria-label={"creates a new user with your desired username"} type="submit"><b>Submit</b></button>
+        </div>
+      </form>
+    </div>
+  )
 }

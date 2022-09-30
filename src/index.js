@@ -4,12 +4,13 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import RoomSystemTest from './RoomSystemTest';
+import NotificationSystem from './NotificationSystem';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  //<React.StrictMode>
+  <NotificationSystem>
     <App />
-  //</React.StrictMode>
+  </NotificationSystem>
 );
 
 // If you want to start measuring performance in your app, pass a function

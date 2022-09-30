@@ -7,9 +7,17 @@ import Videoplayer from './Videoplayer';
 import { useState, useEffect, useMemo }  from'react';
 import UserList from './UserList';
 import { leaveRoom } from "./RoomSystem";
-import RoomSystemTest from './RoomSystemTest';
 import RoomList from './RoomList';
+import ChatBox from "./ChatBox";
+
+import {BrowserRouter as Router, Route, Switch, useLocation } from 'react-router-dom';
+import { useNotification } from "./NotificationSystem";
+
+/*
 import Cleanup from "./Cleanup";
+import RoomSystemTest from './RoomSystemTest';
+*/
+
 
  function getWindowDimensions() { //Function to get the height and width of the window
   const { innerWidth: width, innerHeight: height } = window;
@@ -26,9 +34,17 @@ function App() {
   const [user, changeUser] = useState() //state of users
   const [currentRoom, changeRoom] = useState() //state of current room
   const isMobile = window.innerWidth <= 697; //boolean if used on mobile device
-  
+  const dispatch = useNotification();
+
+  const dispatchNewNotification = (variant, contentType) =>{
+    dispatch({
+      variant: variant,
+      contentType: contentType
+    })
+  }
   const roomChanger = (roomName)=>{
     changeRoom(roomName)
+    dispatchNewNotification("info", "RoomJoin")
   }
 
   useEffect(() => { //when ever the window changes dimensionsm this useEffect updates the windowDims
@@ -52,8 +68,9 @@ function App() {
     ev.preventDefault();
     if (currentRoom !== undefined){
       leaveRoom(currentRoom, user.id)
-    }
+      dispatchNewNotification('info', 'RoomLeave')    }
     deleteUser(user.id)
+    dispatchNewNotification('warning', 'UserDelete')
   }) 
 
   function MainDesktopPage() { //function to render app in desktop mode
@@ -70,6 +87,7 @@ function App() {
         <a className="hiddenNavs" aria-label="to Memberlist" href='#memberlist-box'>Navigate to Memberlist </a>
         <a className="hiddenNavs" aria-label="to Video area" href='#video-box'>Navigate to Video area </a>
         <a className="hiddenNavs" aria-label="to Roomlist" href='#roomlist-box'>Navigate to Roomlist </a>
+        <a className="hiddenNavs" aria-label='to chat box' href='#chatbox'>Navigate to the chat </a>
         <div className="row">
           <div id="memberlist-box" className="memberlist-box">
             <UserList currentRoom = {currentRoom} userId = {user.id} /> 
@@ -80,12 +98,13 @@ function App() {
             {currentRoom !== undefined && <Videoplayer roomname = {currentRoom} userId={user.id} reactwidth = {w} reactheight = {h}/>}
             <a className="hiddenNavs" aria-label="to Memberlist" href='#memberlist-box'>Navigate to Memberlist </a>
             <a className="hiddenNavs" aria-label="to Roomlist" href='#roomlist-box'>Navigate to Roomlist </a>
-          </div>
+          </div> 
           <div id="roomlist-box" className="roomlist-box">
             <RoomList currentRoom = {currentRoom} userId = {user.id} changeRoom={roomChanger} /> 
             <a className="hiddenNavs" aria-label="to Memberlist" href='#memberlist-box'>Navigate to Memberlist </a>
             <a className="hiddenNavs" aria-label="to Video area" href='#video-box'>Navigate to Video area </a>
           </div>
+          {currentRoom !== undefined &&<ChatBox currentRoom={currentRoom} userId={user.id}/>}
         </div>
       </div>
     )
@@ -121,6 +140,7 @@ function App() {
             <a className="hiddenNavs" aria-label="to Video area" href='#video-box'>Navigate to Video area </a>
             <a className="hiddenNavs" aria-label="to Roomlist" href='#roomlist-box'>Navigate to Roomlist </a>
           </div>
+          {currentRoom !== undefined &&<ChatBox currentRoom={currentRoom} userId={user.id}/>}
         </div>
     )
   }
@@ -128,12 +148,14 @@ function App() {
   
   return (
     <div id="top">
-      <NavigationBar/>
-      {user === undefined && <Login changeUser={changeUser}/>}
-      {user !== undefined && !isMobile && <MainDesktopPage/>}  
-      {user !== undefined && isMobile && <MainMobilePage/>}      
+      <div className="header-Navbar">
+        <NavigationBar/>
+      </div>  
+      {user === undefined && <Login changeUser={changeUser} changeRoom={roomChanger}/>}
+      {user !== undefined && !isMobile && <MainDesktopPage/>}
+      {user !== undefined && isMobile && <MainMobilePage/>}
       <a className="hiddenNavs" aria-label="to top of page" href='#top'>Navigate to the Top </a>
-    </div>
+  </div>  
   )
 }
 

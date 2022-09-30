@@ -13,7 +13,7 @@
 }
 
  .hiddenNavs{
-  position:absolute;
+  position:relative;
   left:-10000px;
   top:auto;
   width:1px;
@@ -21,31 +21,44 @@
   overflow:hidden;
 }  
 
-@media only screen and (min-width: 698px) {
+.notification-wrapper {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  width: 300px;
+  z-index: 999;
+}
 
+@media only screen and (min-width: 698px) {
   .row {
-    display: flex;
-    height: 100%;
+    display:flex;
+    flex-direction: row;
+    
   }
+  
   .roomlist-box {
     display: inline-block;
     width: 25%;
     border: 1px solid #1F2833;
     display: flex;
     flex-direction: column;
+    align-items: stretch;
     background-color: #45A29E;
     color: #C5C6C7;
     margin: 0.25%;
     margin-top: 0.5%;
+
   }
+
   .video-box {
     display: inline-block;
     width: 50%;
+    align-items: stretch;
     border: 1px solid #1F2833;
     background-color: #45A29E;
     color: #C5C6C7;
     margin: 0.25%;
-    margin-top: 0.5%;
+    margin-top: 0.5%;   
   }
 
   .memberlist-box {
@@ -54,6 +67,7 @@
     border: 1px solid #1F2833;
     display: flex;
     flex-direction: column;
+    align-items: stretch;
     background-color: #45A29E;
     color: #C5C6C7;
     margin: 0.25%;
@@ -114,4 +128,15 @@ a:focus {
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.header-Navbar{
+  position: sticky;
+  top:0
+}
+
+.Chatbox{
+  position: sticky;
+  bottom: 2%;
+  align-self: right;
 }

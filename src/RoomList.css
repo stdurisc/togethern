@@ -1,40 +1,42 @@
 .roomlist-wrapper{
-    margin: 0;
-    padding:0;
-    align-items: center;
+    background-color: #45A29E;
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+    flex-wrap:wrap;
 }
 
 .room-header{
-    margin-left: 10%;
-    margin-bottom: 0;
+    margin: 5%;
 }
 
 .room-list {
-    background-color: #1F2833;
-    list-style-position: inside;
-    list-style: none;
-    padding-left : 0;
-    padding-right : 0;
-    padding-top: .5%;
-    padding-bottom: 1.5%;    
-    margin: 10%;
-    margin-bottom: 5%;
+    background-color: #45A29E;
+    margin: 3%;
+    height: 350px;
+    overflow: auto;
+    padding: 0px;
+    width: 70%;
 }
 
 .other-Room{
     color: #45A29E;
+    background-color: #1F2833;
     border-style: solid;
     margin-top: 2%;
     margin-left: 2%;
     margin-right: 2%;
-    border-color: #66fcf1;
+    border-color: #45A29E;
     display: flex;
     align-items: center;
-    justify-content: center
+    justify-content: center;
+    border-radius: var(--edgeRadius);
 }
 
 .current-Room{
     color: #66FCF1;
+    background-color: #1F2833;
     border-style: solid;
     margin-top: 2%;
     margin-left: 2%;
@@ -44,7 +46,7 @@
     align-items: center;
     justify-content: center;
     font-style: oblique;
-    text-decoration: underline;
+    border-radius: var(--edgeRadius);
 }
 
 .room-button-other-Room{
@@ -55,7 +57,7 @@
     display: inline-block;
     cursor: pointer;
     padding: 2% 20% ;
-    margin: 2%;
+    margin: 0;
  }
 
 .room-button-current-Room{
@@ -66,13 +68,13 @@
     display: inline-block;
     cursor: pointer;
     padding: 2% 20% ;
-    margin: 2%;
+    margin: 0;
     font-style: oblique;
     text-decoration: underline;
 }
 
 .create{
-    margin-left: 10%;
+    margin: 3px;
     color: #45A29E;
     background: #1F2833;
     border:none;
@@ -80,11 +82,11 @@
     display: inline-block;
     cursor: pointer;
     padding: 2% 8% ;
-    
+    border-radius: var(--edgeRadius);
 }
 
 .delete{
-    margin-bottom: 5%;
+    margin: 3px;
     color: #45A29E;
     background: #1F2833;
     border:none;
@@ -92,7 +94,14 @@
     display: inline-block;
     cursor: pointer;
     padding: 2% 8% ;
-}  
+    border-radius: var(--edgeRadius);
+}
+
+.roomlink-text{
+    position: relative;
+    left: 15px;
+    text-align: center;
+}
 
 @media only screen and (min-width: 698px) {
     .delete{

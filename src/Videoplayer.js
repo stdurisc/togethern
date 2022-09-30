@@ -6,6 +6,9 @@ import React, {useEffect, useState, useRef, useMemo, useCallback} from 'react'
 import './Videoplayer.css'
 import ReactPlayer from 'react-player/lazy'
 import {getRoomVideo, setRoomVideo, getRoomTime, setRoomTime, getRoomStatus, setRoomStatus} from './RoomSystem'
+import Async from "react-async"
+import {Error} from './Error'
+import { useNotification } from './NotificationSystem'
 
 export default function Videoplayer({roomname, userId, reactwidth, reactheight}) {
   /* const roomname = props.roomname
@@ -19,7 +22,14 @@ export default function Videoplayer({roomname, userId, reactwidth, reactheight})
       progress: 0,                                            //videoprogress of current room / progress of the video in seconds
     })
     const [looping, isLooping] = useState (true) // useState for Looping video. True = Looping video
-    //def search tearm so inputbar doesn't loose text while typing in rerender
+    const dispatch = useNotification();
+
+    const dispatchNewNotification = (variant, contentType) =>{
+      dispatch({
+        variant: variant,
+        contentType: contentType
+      })
+    }
     //console.log("Playerconfig: " + [playerConfig.video, playerConfig.status, playerConfig.progress])
     
     const handleKeyDown = async(event) => {    //handles video link inputbar
@@ -55,7 +65,7 @@ export default function Videoplayer({roomname, userId, reactwidth, reactheight})
         if (playerConfig.video !== serverData.video || playerConfig.status !== serverData.status || Math.abs( playerConfig.progress - serverData.progress) > 1.5){ 
           //if the current video or status of the room or if the time diffrence between server and client is greater then 1.5 seconds,
           //config update and the player adjust its own time to the one of the server
-          
+          if(playerConfig.video !== serverData.video){ dispatchNewNotification( 'success', 'VideoChange')}
           playerRef.current?.seekTo(serverData.progress)
           changePlayerConfig(serverData)
         }
@@ -80,7 +90,7 @@ export default function Videoplayer({roomname, userId, reactwidth, reactheight})
 
     const TestControls =() => { 
       //developer tools for sync testing
-      //DONT RENDER IS STABLE BUILD
+      //DONT RENDER IN STABLE BUILD
       return (
         <div>
           <h1> TEST CONTROLS</h1>
@@ -97,8 +107,10 @@ export default function Videoplayer({roomname, userId, reactwidth, reactheight})
       //function to turn string status into boolean status for reactplayer 
       //only changes when the status changed to for render optimizations
       if(playerConfig.status === 'playing'){
+        dispatchNewNotification('info', 'VideoResume')
         return true
       } else {
+        dispatchNewNotification('info', 'VideoPause')
         return false
       }
     },[playerConfig.status])
@@ -110,7 +122,6 @@ export default function Videoplayer({roomname, userId, reactwidth, reactheight})
          this will be fixed in then ext update when able player is integrated, we apologize for the inconvenience' >navigate to video player </a>
         <input id='linkinput' aria-label='Enter your links for new videos here' ref={inputRef} className = "Inputbar" type="text" onKeyDown={handleKeyDown}  />  
         {/* <TestControls/> */}
-        
           <ReactPlayer
             className = "ReactPlayer" 
             width={reactwidth + "px"}
@@ -154,6 +165,14 @@ export default function Videoplayer({roomname, userId, reactwidth, reactheight})
   }
 
   return (
-    <Player />
+    <div>
+      <Async promiseFn={()=>getRoomStatus(roomname)}>
+        {({data, error, isPending}) => {
+          if(isPending) return "Loading..." // solange anfrage nicht zurueck ist steht da loading
+          else if(error) return (<Error />) // bei fehler kommt error page
+          else return (<Player />) // wenn kein error dann videoplayer
+        }}
+      </Async>
+    </div>
   )
 }

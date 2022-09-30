@@ -124,10 +124,6 @@ async function getRoomStatus (roomname) { //returns a Promise that contains a ro
         } 
         return res.json()
     })
-    .catch(err => {
-        console.log(err)
-        return err
-    })
 } 
 
 async function setRoomStatus (roomname, userid, status) { //sets a room status (paused/playing)

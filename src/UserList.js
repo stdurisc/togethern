@@ -35,7 +35,7 @@ export default function UserList(props) {
           }
           return (
             <li className={className} key={property.id}> 
-              <img className="pfp" alt = 'blank profile stockfoto' src={blankpfp}/><p className="element-Text">User: {property.id} <br /> {property.name}  </p>  
+              <img className="pfp" alt = 'blank profile stockfoto' src={blankpfp}/><p className="element-Text">User {property.id} <br /> {property.name}  </p>
               
             </li>
           )
@@ -68,7 +68,7 @@ export default function UserList(props) {
   return (
     <div id='userList-wrapper' className="userList-wrapper">
       <h1 className="user-header">Active User</h1>
-      <ul className="User-List">
+      <ul className="User-List" type='none'>
         {displayUsers()}
       </ul>
     </div>

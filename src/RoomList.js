@@ -3,6 +3,7 @@ Author: Dustin Rischke
 */
 
 import React, {useState, useEffect} from 'react'
+import { useNotification } from './NotificationSystem'
 import './RoomList.css'
 import { getAllRooms, enterRoom, leaveRoom, createNewRoom, setRoomVideo, setRoomStatus } from './RoomSystem'
 
@@ -10,13 +11,22 @@ import { getAllRooms, enterRoom, leaveRoom, createNewRoom, setRoomVideo, setRoom
 export default function RoomList({currentRoom, userId, changeRoom}) {
     var [roomlist, updateRoomlist] = useState({}) //list of all available rooms
     var className //help var to determine the room the current user is in
+    const dispatch = useNotification();
 
+    const dispatchNewNotification = (variant, contentType) =>{
+        dispatch({
+        variant: variant,
+        contentType: contentType
+        })
+    }
+    
     useEffect(()=>{ //initialize useEffect
         getAllRooms()
         .then(data => updateRoomlist(data)) 
         
     },[])   
-  
+
+
     function displayRooms(){ //function to display all Rooms as idividual List elements
         var contentKeys = Object.keys(roomlist) //gets all keys of the roomlist json object (= rooms)
         var allRooms = contentKeys.map(  //maps an array of all first level keywords of json object
@@ -43,11 +53,9 @@ export default function RoomList({currentRoom, userId, changeRoom}) {
             )
         )
   
-      return (
-        <div>
-            {allRooms}
-        </div>
-      )
+      return allRooms
+
+
     }
     
     
@@ -56,12 +64,30 @@ export default function RoomList({currentRoom, userId, changeRoom}) {
     useEffect(()=>{
       var intervall = setInterval(() => {
         getAllRooms()
-        .then(data => updateRoomlist(data)) //updates the Roomlist every second, currently trying to use useMemo here to optimize render and data
-                                            // current Problem: react doesnt allow hooks like useMemo, useCallback,... in other "Callbacks" bc appearently useEffect is a Callback???
+        .then(data => updateRoomlist(data))
       },1000)
   
       return () => clearInterval(intervall)
-    },)   
+    },)  
+
+    // host = localhost:3000
+    // der link zum raum
+    const url = window.location.host + "/" + currentRoom
+
+    // Link in zwischenablage packen
+    function copy() {
+        // erstellt input element
+        const el = document.createElement('input');
+        // packt url in input
+        el.value = url;
+        document.body.appendChild(el);
+        // markiert url in input
+        el.select();
+        // fuerht kopieren aus
+        document.execCommand('copy');
+        // entfernt input wieder
+        document.body.removeChild(el);
+    }
       
     return (
         <div id='roomlist-wrapper' className="roomlist-wrapper"> 
@@ -72,9 +98,10 @@ export default function RoomList({currentRoom, userId, changeRoom}) {
                 {displayRooms()}
             </ul>
             <a className="hiddenNavs" aria-label="to top of the list" href='#roomheader'>Navigate to top of the list </a>
+            
             <button id='newroombutton' aria-label="Create New Room"  className="create" onClick={async() => 
                 {
-                    let response = await createNewRoom() 
+                    let response = await createNewRoom()
                     setRoomVideo(response['name'], userId, 'https://www.youtube.com/watch?v=SBxpeuxUiOA' )
                     setRoomStatus(response['name'], userId, 'paused' )
                     changeRoom(response['name'])
@@ -85,8 +112,14 @@ export default function RoomList({currentRoom, userId, changeRoom}) {
                 {
                 changeRoom()
                 leaveRoom(currentRoom, userId)
+                dispatchNewNotification('info', 'RoomLeave')
                 }
             }> Leave Room</button>} {/* renders a button to leave the room if user is in a room */}
+
+            {/* wenn in raum dann link und button anzeigen */}
+            { currentRoom && (<div> <p className='roomlink-text'>Roomlink: <br/> {url}</p> <button className="create" onClick={ copy }>Copy URL</button></div>)}
+            
+            
             
         </div>
       

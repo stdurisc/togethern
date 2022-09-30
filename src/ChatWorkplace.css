@@ -1,0 +1,74 @@
+:root{
+    --input-field-size: 300px;
+    --general_space: 15px;
+}
+
+.chat{
+    height: 100%;
+    align-content: center;
+    justify-content: center;
+    overflow-y: scroll;
+}
+.message-input{
+    position: sticky;
+    top: var(--general_space);
+    left: var(--general_space);
+    width: var(--input-field-size);
+}
+.send-button{
+    position: sticky;
+    color: #45A29E;
+    background: #1F2833;
+    border-color: #45A29E;
+    padding: 4px;
+    border-radius: var(--edgeRadius);
+    top: var(--general_space);
+    left: calc(1.15*var(--input-field-size));
+    cursor: pointer;
+}
+.other-chatuser{
+    width: 70%;
+    float: left;
+    border-radius: var(--edgeRadius);
+    background-color: #1F2833;
+    color: #45A29E;
+    border-style: solid;
+    padding: 1px;
+    margin: 2px;
+    border-color: #1F2833;
+    align-items: center;
+    justify-content: center;
+}
+
+.this-chatuser{
+    width: 70%;
+    float: right;
+    margin: 2px;
+    border-radius: var(--edgeRadius);
+    background-color: #1F2833;
+    color: #66fcf1;
+    border-style: solid;
+    padding: 1px;
+    border-color: #1F2833;
+    align-items: center;
+    justify-content: center;
+}
+
+.chat-user{
+    margin: 2px;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.chat-text{
+    margin: 2px;
+}
+
+.chat-timestamp{
+    margin: 2px;
+    text-align: right;
+    font-size: smaller;
+}
+.chat-history{
+    padding-right: 3px;
+}

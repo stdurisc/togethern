@@ -1,52 +1,57 @@
 .userList-wrapper{
+    background-color: #45A29E;
     margin: 0;
     padding:0;
-    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-wrap:wrap;
 }
 
 .user-header{
-    margin-left: 10%;
+    margin-left: 5%;
 }
 
 .User-List {
-    background-color: #1F2833;
-    list-style-position: inside;
-    list-style: none;
-    padding-left : 0;
-    padding-right : 0;
-    padding-top: .5%;
-    padding-bottom: 1.5%; 
-    margin: 10%;
+    background-color: #45A29E;
+    margin: 3%;
+    max-height: 645px;
+    overflow: auto;
+    padding: 0px;
+    width: 70%;
 }
 
 .other-user{
     color: #45A29E;
+    background-color: #1F2833;
     border-style: solid;
     margin-top: 2%;
     margin-left: 2%;
     margin-right: 2%;
-    border-color: #66fcf1;
+    padding: 3px;
+    border-color: #45A29E;
     align-items: center;
-    justify-content: center
+    justify-content: center;
+    border-radius: var(--edgeRadius);
 }
 
 .current-user{
     color: #66FCF1;
+    background-color: #1F2833;
     border-style: solid;
     margin-top: 2%;
     margin-left: 2%;
     margin-right: 2%;
-    border-color: #66fcf1;
+    padding: 3px;
+    border-color: #66FCF1;
     align-items: center;
     justify-content: center;
     font-style: oblique;
-    text-decoration: underline;
+    border-radius: var(--edgeRadius);
 }
 
 .element-Text{
     text-align: left;
     margin: 0;
-    font: optional;
     
 }
 
@@ -54,6 +59,6 @@
     margin: 1%;
     height: 25%;
     width: 25%;
-    flex-basis: 40%
-    
+    flex-basis: 40%;
+    border-radius: var(--edgeRadius);
 }
